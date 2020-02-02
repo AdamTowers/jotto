@@ -13,7 +13,7 @@ export class UnconnectedInput extends Component {
 
     // initialize state
     this.state = {
-      currentGuess: null
+      currentGuess: ""
     };
 
     // bind this for submitGuessedWord
@@ -38,6 +38,7 @@ export class UnconnectedInput extends Component {
           data-test="input-box"
           className="mb-2 mx-sm-3"
           type="text"
+          value={this.state.currentGuess}
           onChange={event =>
             this.setState({ currentGuess: event.target.value })
           }
