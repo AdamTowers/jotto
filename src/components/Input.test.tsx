@@ -1,7 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
-import { findByTestAttr, storeFactory } from "../test/testUtils";
-import Input, { UnconnectedInput } from "./Input";
+import { findByTestAttr, storeFactory } from "../../test/testUtils";
+import Input, { InputBase } from "./Input";
 
 /**
  * Factory function to create a ShallowWrapper for the Input component.
@@ -83,7 +83,7 @@ describe("'guessWord' action creator call", () => {
       guessWord: guessWordMock
     };
     // set up app component with guessWordMock as the guessWord prop
-    wrapper = shallow(<UnconnectedInput {...props} />);
+    wrapper = shallow(<InputBase {...props} />);
     // add value to input box
     wrapper.setState({ currentGuess: guessedWord });
     // simulate click

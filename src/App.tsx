@@ -1,12 +1,29 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./App.css";
-import GuessedWords from "./GuessedWords";
-import Congrats from "./Congrats";
-import Input from "./Input";
-import { getSecretWord } from "./actions";
+import GuessedWords from "./components/GuessedWords";
+import Congrats from "./components/Congrats";
+import Input from "./components/Input";
+import { getSecretWord } from "./redux/actions";
+import { ApplicationReduxShape } from "./redux/applicationReduxShape";
+import { GuessedWordShape } from "./redux/reducers/guessedWordsReducer";
 
-export class UnconnectedApp extends Component {
+// Redux provided props via mapDispatchToProps
+interface AppDispatchProps {
+  getSecretWord: () => any; // TODO: Type thunk dispatch
+}
+
+// Redux provided props via mapStateToProps
+interface AppStateProps {
+  success: boolean;
+  guessedWords: GuessedWordShape[];
+  secretWord: string;
+}
+
+// Merged props of the above interfaces
+type AppProps = AppDispatchProps & AppStateProps;
+
+export class AppBase extends Component<AppProps> {
   /**
    * @method componentDidMount
    * @returns {undefined}
@@ -29,8 +46,16 @@ export class UnconnectedApp extends Component {
   }
 }
 
-const mapStateToProps = ({ success, guessedWords, secretWord }) => {
-  return { success, guessedWords, secretWord };
+const mapDispatchToProps = () => {
+  return { getSecretWord };
 };
 
-export default connect(mapStateToProps, { getSecretWord })(UnconnectedApp);
+const mapStateToProps = (state: ApplicationReduxShape) => {
+  return {
+    success: state.success,
+    guessedWords: state.guessedWords,
+    secretWord: state.secretWord
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AppBase);

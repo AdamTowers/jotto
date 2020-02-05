@@ -1,7 +1,11 @@
 import React from "react";
-import PropTypes from "prop-types";
+import { GuessedWordShape } from "../redux/reducers/guessedWordsReducer";
 
-const GuessedWords = props => {
+interface GuessedWordsOwnProps {
+  guessedWords: GuessedWordShape[];
+}
+
+export default (props: GuessedWordsOwnProps) => {
   let contents;
 
   if (props.guessedWords.length === 0) {
@@ -34,14 +38,3 @@ const GuessedWords = props => {
 
   return <div data-test="component-guessed-words">{contents}</div>;
 };
-
-GuessedWords.propTypes = {
-  guessedWords: PropTypes.arrayOf(
-    PropTypes.shape({
-      guessedWord: PropTypes.string.isRequired,
-      letterMatchCount: PropTypes.number.isRequired
-    })
-  ).isRequired
-};
-
-export default GuessedWords;

@@ -1,7 +1,8 @@
-import checkPropTypes from "check-prop-types";
 import { createStore, applyMiddleware } from "redux";
-import rootReducer from "../src/reducers";
+import rootReducer from "../src/redux/reducers";
 import { middlewares } from "../src/configureStore";
+import { ApplicationReduxShape } from "../src/redux/applicationReduxShape";
+import { ShallowWrapper } from "enzyme";
 
 /**
  * Create a testing store with imported reducers, middleware, and initial state.
@@ -10,7 +11,7 @@ import { middlewares } from "../src/configureStore";
  * @function storeFactory
  * @returns {Store} – Redux store.
  */
-export const storeFactory = initialState => {
+export const storeFactory = (initialState: any) => {
   const createStoreWithMiddleware = applyMiddleware(...middlewares)(
     createStore
   );
@@ -23,6 +24,6 @@ export const storeFactory = initialState => {
  * @param {string} val – Value of data-test attribute for search.
  * @returns {ShallowWrapper}
  */
-export const findByTestAttr = (wrapper, val) => {
+export const findByTestAttr = (wrapper: ShallowWrapper, val: string) => {
   return wrapper.find(`[data-test="${val}"]`);
 };

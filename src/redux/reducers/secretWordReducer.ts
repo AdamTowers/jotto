@@ -6,7 +6,8 @@ import { actionTypes } from "../actions";
  * @param {object} action – Action sent to reducer.
  * @returns {string} – New state (secret word payload from action).
  */
-export default (state = null, action) => {
+export default (state = null, action: any) => {
+  // TODO: Type redux action
   switch (action.type) {
     case actionTypes.SET_SECRET_WORD:
       return action.payload;
