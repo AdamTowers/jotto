@@ -1,6 +1,7 @@
 import { getLetterMatchCount } from "../../helpers";
 import axios from "axios";
 import { Action, Dispatch } from "redux";
+import { ApplicationReduxShape } from "../applicationReduxShape";
 
 export const actionTypes = {
   CORRECT_GUESS: "CORRECT_GUESS",
@@ -16,7 +17,10 @@ export const actionTypes = {
  * @returns {function} – Redux Thunk function.
  */
 export const guessWord = (guessedWord: string) => {
-  return function(dispatch: Dispatch<any>, getState: any) {
+  return function(
+    dispatch: Dispatch<any>,
+    getState: () => ApplicationReduxShape
+  ) {
     const secretWord = getState().secretWord;
     const letterMatchCount = getLetterMatchCount(guessedWord, secretWord);
 

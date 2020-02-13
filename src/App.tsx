@@ -50,7 +50,7 @@ const mapDispatchToProps = () => {
   return { getSecretWord };
 };
 
-const mapStateToProps = (state: ApplicationReduxShape) => {
+const mapStateToProps = (state: ApplicationReduxShape): AppStateProps => {
   return {
     success: state.success,
     guessedWords: state.guessedWords,

@@ -1,5 +1,5 @@
 import React from "react";
-import App, { UnconnectedApp } from "./App";
+import App, { AppBase } from "./App";
 import { storeFactory } from "../test/testUtils";
 import { shallow } from "enzyme";
 
@@ -51,7 +51,7 @@ test("'getSecretWord' runs on App mount", () => {
     guessedWords: []
   };
   // set up app component with getSecretWordMock as the getSecretWord prop
-  const wrapper = shallow(<UnconnectedApp {...props} />);
+  const wrapper = shallow(<AppBase {...props} />);
   // run lifecycle method
   wrapper.instance().componentDidMount();
   // check to see if mock ran
